@@ -31,7 +31,7 @@ module.exports = {
           {
             loader: 'svelte-loader',
             options: {
-              emitCss: !devMode,
+              emitCss: true,
               hotReload: devMode,
               preprocess: sveltePreprocess({
                 scss: {
@@ -53,6 +53,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        // 若有引入不在 ./src/ 路徑的 css 檔（如 node_modules），需在此加入新路徑
         include: [resolve('./src/')]
       },
       {
