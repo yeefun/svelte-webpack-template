@@ -1,8 +1,11 @@
 <template>
   <h1>Hello {name}!</h1>
+  <img src="{logo}" alt="Svelte Logo">
 </template>
 
 <script>
+import logo from './assets/logo.png'
+
 export let name
 
 const arr = [1, 2, 3]
@@ -15,7 +18,12 @@ console.log(newArr)
   font-size: 10px;
 }
 h1 {
-  font-size: 2.4rem;
-  box-shadow: 1px 1px 4px #000;
+  font-size: 4.8rem;
+  color: #ff3e00;
+  filter: blur(4px);
+}
+img {
+  width: 80px;
+  height: auto;
 }
 </style>
