@@ -6,6 +6,6 @@ module.exports = merge(common, {
   devServer: {
     compress: true,
     port: 8080,
-    contentBase: path.join('./public/')
-  }
+    contentBase: path.join('./public/'),
+  },
 })

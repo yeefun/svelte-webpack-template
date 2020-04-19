@@ -18,7 +18,7 @@ module.exports = merge(common, {
     ]),
     new CleanWebpackPlugin(),
     new OptimizeCssAssetsPlugin(),
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
   ],
   optimization: {
     minimize: true,
@@ -28,10 +28,10 @@ module.exports = merge(common, {
         sourceMap: true,
         terserOptions: {
           compress: {
-            drop_console: true
-          }
-        }
-      })
-    ]
-  }
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  },
 })

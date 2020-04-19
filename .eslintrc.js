@@ -3,27 +3,28 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2019,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   extends: [
-    'eslint:recommended'
+    'eslint:recommended',
   ],
   plugins: [
     'svelte3',
-    'html'
+    'html',
   ],
   overrides: [
     {
       files: ['**/*.svelte'],
-      processor: 'svelte3/svelte3'
+      processor: 'svelte3/svelte3',
     }
   ],
   rules: {
-    semi: ['error', 'never']
+    semi: ['error', 'never'],
+    // 'comma-dangle': ['error', 'always-multiline'],
   },
   settings: {
     /**
@@ -32,5 +33,5 @@ module.exports = {
      * see https://github.com/sveltejs/eslint-plugin-svelte3#svelte3ignore-styles
      */
     // 'svelte3/ignore-styles': (attributes) => attributes.lang
-  }
+  },
 }
