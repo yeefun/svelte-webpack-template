@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 
 const sveltePreprocess = require('svelte-preprocess')
+const svgToMiniDataURI = require('mini-svg-data-uri')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -70,6 +71,17 @@ module.exports = {
             options: {
               limit: 8192,
               name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash:8].[ext]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              generator: (content) => svgToMiniDataURI(content.toString()),
             },
           },
         ],
