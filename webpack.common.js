@@ -16,7 +16,8 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: resolve('./dist/'),
-    filename: devMode ? './js/[name].js' : './js/[name].[contenthash:8].js',
+    publicPath: devMode ? '/' : '/dist/',
+    filename: devMode ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
   },
   module: {
     rules: [
@@ -70,7 +71,8 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash:8].[ext]',
+              outputPath: 'img',
+              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
             },
           },
         ],
@@ -82,6 +84,8 @@ module.exports = {
             loader: 'url-loader',
             options: {
               generator: (content) => svgToMiniDataURI(content.toString()),
+              outputPath: 'img',
+              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
             },
           },
         ],
@@ -90,15 +94,16 @@ module.exports = {
         test: /\.(woff|woff2|ttf|eot|ttf|otf)$/i,
         loader: 'file-loader',
         options: {
-          name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash:8].[ext]',
+          outputPath: 'fonts',
+          name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
         },
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[contenthash:8].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[contenthash:8].css',
+      filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
+      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
       title: 'Svelte App',
