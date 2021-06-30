@@ -1,10 +1,10 @@
-const { resolve } = require('path')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-const webpack = require('webpack')
-const CopyPlugin = require('copy-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { resolve } = require('path');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = merge(common, {
   plugins: [
@@ -16,8 +16,8 @@ module.exports = merge(common, {
           globOptions: {
             ignore: ['**/*.html'],
           },
-        }
-      ]
+        },
+      ],
     }),
     new webpack.ids.HashedModuleIdsPlugin(),
   ],
@@ -35,4 +35,4 @@ module.exports = merge(common, {
     ],
     moduleIds: 'deterministic',
   },
-})
+});

@@ -1,6 +1,6 @@
-const path = require('path')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
+const path = require('path');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   devServer: {
@@ -8,4 +8,4 @@ module.exports = merge(common, {
     port: 8080,
     contentBase: path.join('./public/'),
   },
-})
+});

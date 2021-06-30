@@ -1,15 +1,13 @@
-const { resolve } = require('path')
+const { resolve } = require('path');
 
-const sveltePreprocess = require('svelte-preprocess')
-const svgToMiniDataURI = require('mini-svg-data-uri')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
+const sveltePreprocess = require('svelte-preprocess');
+const svgToMiniDataURI = require('mini-svg-data-uri');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
-const devMode = (process.env.NODE_ENV === 'development')
-const transpileDependencies = [
-  'svelte',
-]
+const devMode = process.env.NODE_ENV === 'development';
+const transpileDependencies = ['svelte'];
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -24,7 +22,11 @@ module.exports = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: devMode ? /node_modules/ : new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`),
+        exclude: devMode
+          ? /node_modules/
+          : new RegExp(
+              `node_modules/(?!(${transpileDependencies.join('|')})/).*`
+            ),
         use: ['babel-loader'],
       },
       {
@@ -57,11 +59,7 @@ module.exports = {
         test: /\.css$/,
         include: [resolve('./src/')],
         exclude: /svelte\.\d+\.css/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.css$/,
@@ -101,7 +99,9 @@ module.exports = {
         test: /\.(woff|woff2|ttf|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: devMode ? 'fonts/[name].[ext]' : 'fonts/[name].[contenthash:8].[ext]',
+          filename: devMode
+            ? 'fonts/[name].[ext]'
+            : 'fonts/[name].[contenthash:8].[ext]',
         },
       },
     ],
@@ -130,4 +130,4 @@ module.exports = {
     },
     mainFields: ['svelte', 'browser', 'module', 'main'],
   },
-}
+};

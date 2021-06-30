@@ -9,18 +9,13 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
   },
-  extends: [
-    'eslint:recommended',
-  ],
-  plugins: [
-    'svelte3',
-    'html',
-  ],
+  extends: ['eslint:recommended'],
+  plugins: ['svelte3', 'html'],
   overrides: [
     {
       files: ['**/*.svelte'],
       processor: 'svelte3/svelte3',
-    }
+    },
   ],
   settings: {
     /**
@@ -30,4 +25,4 @@ module.exports = {
      */
     // 'svelte3/ignore-styles': (attributes) => attributes.lang
   },
-}
+};
