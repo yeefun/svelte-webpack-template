@@ -53,10 +53,33 @@ module.exports = {
         include: [resolve('./src/')],
       },
       {
+        test: /node_modules\/svelte\/.*\.mjs$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+      {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        // 若有引入不在 ./src/ 路徑的 css 檔（如 node_modules），需在此加入新路徑
         include: [resolve('./src/')],
+        exclude: /svelte\.\d+\.css/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        include: [/svelte\.\d+\.css/, resolve('./src/')],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: false, // necessary if you use url('/path/to/some/asset.png|jpg|gif')
+            },
+          },
+        ],
       },
       {
         enforce: 'pre',
