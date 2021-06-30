@@ -22,12 +22,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/i,
-        exclude: devMode ? /node_modules/ : new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`, 'i'),
+        test: /\.m?js$/,
+        exclude: devMode ? /node_modules/ : new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`),
         use: ['babel-loader'],
       },
       {
-        test: /\.(html|svelte)$/i,
+        test: /\.(html|svelte)$/,
         use: [
           'babel-loader',
           {
@@ -53,19 +53,19 @@ module.exports = {
         include: [resolve('./src/')],
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
         // 若有引入不在 ./src/ 路徑的 css 檔（如 node_modules），需在此加入新路徑
         include: [resolve('./src/')],
       },
       {
         enforce: 'pre',
-        test: /\.js$/i,
+        test: /\.js$/,
         include: [resolve('./src/')],
         loader: 'eslint-loader',
       },
       {
-        test: /\.(|png|jpe?g|gif)$/i,
+        test: /\.(|png|jpe?g|gif)$/,
         use: [
           {
             loader: 'url-loader',
@@ -78,7 +78,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.svg$/i,
+        test: /\.svg$/,
         use: [
           {
             loader: 'url-loader',
@@ -91,7 +91,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff|woff2|ttf|eot|ttf|otf)$/i,
+        test: /\.(woff|woff2|ttf|eot|ttf|otf)$/,
         loader: 'file-loader',
         options: {
           outputPath: 'fonts',
