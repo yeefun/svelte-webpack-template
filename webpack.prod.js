@@ -4,7 +4,7 @@ const common = require('./webpack.common.js')
 const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = merge(common, {
   plugins: [
@@ -19,12 +19,12 @@ module.exports = merge(common, {
         }
       ]
     }),
-    new OptimizeCssAssetsPlugin(),
     new webpack.ids.HashedModuleIdsPlugin(),
   ],
   optimization: {
     minimize: true,
     minimizer: [
+      new CssMinimizerPlugin(),
       new TerserPlugin({
         terserOptions: {
           compress: {
