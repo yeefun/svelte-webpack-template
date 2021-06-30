@@ -6,23 +6,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const devMode = process.env.NODE_ENV === 'development';
+const isDevEnv = process.env.NODE_ENV === 'development';
 const transpileDependencies = ['svelte'];
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool: devMode ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: isDevEnv ? 'eval-cheap-module-source-map' : 'source-map',
   entry: './src/main.js',
   output: {
-    publicPath: devMode ? '/' : '/dist/',
-    filename: devMode ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
+    publicPath: isDevEnv ? '/' : '/dist/',
+    filename: isDevEnv ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: devMode
+        exclude: isDevEnv
           ? /node_modules/
           : new RegExp(
               `node_modules/(?!(${transpileDependencies.join('|')})/).*`
@@ -37,7 +37,7 @@ module.exports = {
             loader: 'svelte-loader',
             options: {
               emitCss: true,
-              hotReload: devMode,
+              hotReload: isDevEnv,
               preprocess: sveltePreprocess({
                 scss: {
                   renderSync: true,
@@ -76,7 +76,7 @@ module.exports = {
             options: {
               limit: 8192,
               outputPath: 'images',
-              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
+              name: isDevEnv ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
             },
           },
         ],
@@ -92,7 +92,7 @@ module.exports = {
         test: /\.(woff|woff2|ttf|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: devMode
+          filename: isDevEnv
             ? 'fonts/[name].[ext]'
             : 'fonts/[name].[contenthash:8].[ext]',
         },
@@ -101,8 +101,8 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
-      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
+      filename: isDevEnv ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
+      chunkFilename: isDevEnv ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
       title: 'Svelte App',
