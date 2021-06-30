@@ -4,6 +4,7 @@ const sveltePreprocess = require('svelte-preprocess')
 const svgToMiniDataURI = require('mini-svg-data-uri')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const devMode = (process.env.NODE_ENV === 'development')
 const transpileDependencies = [
@@ -43,12 +44,6 @@ module.exports = {
               }),
             },
           },
-          {
-            loader: 'eslint-loader',
-            options: {
-              emitWarning: devMode,
-            },
-          },
         ],
         include: [resolve('./src/')],
       },
@@ -80,12 +75,6 @@ module.exports = {
             },
           },
         ],
-      },
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        include: [resolve('./src/')],
-        loader: 'eslint-loader',
       },
       {
         test: /\.(|png|jpe?g|gif)$/,
@@ -132,6 +121,10 @@ module.exports = {
       title: 'Svelte App',
       template: resolve('./public/index.html'),
       filename: 'index.html',
+    }),
+    new ESLintPlugin({
+      extensions: ['js', 'svelte'],
+      files: './src/',
     }),
   ],
   optimization: {
