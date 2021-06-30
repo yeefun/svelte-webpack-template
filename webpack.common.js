@@ -78,12 +78,13 @@ module.exports = {
       },
       {
         test: /\.(|png|jpe?g|gif)$/,
+        dependency: { not: ['url'] },
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              outputPath: 'img',
+              outputPath: 'images',
               name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
             },
           },
@@ -91,23 +92,16 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              generator: (content) => svgToMiniDataURI(content.toString()),
-              outputPath: 'img',
-              name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
-            },
-          },
-        ],
+        type: 'asset/inline',
+        generator: {
+          dataUrl: (content) => svgToMiniDataURI(content.toString()),
+        },
       },
       {
         test: /\.(woff|woff2|ttf|eot|ttf|otf)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'fonts',
-          name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: devMode ? 'fonts/[name].[ext]' : 'fonts/[name].[contenthash:8].[ext]',
         },
       },
     ],
