@@ -22,10 +22,6 @@ module.exports = {
       processor: 'svelte3/svelte3',
     }
   ],
-  rules: {
-    semi: ['error', 'never'],
-    // 'comma-dangle': ['error', 'always-multiline'],
-  },
   settings: {
     /**
      * If you're using some sort of preprocessor on the component styles, then it's likely that when this plugin calls the Svelte compiler on your component, it will throw an exception.
