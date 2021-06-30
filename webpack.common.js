@@ -12,12 +12,12 @@ const transpileDependencies = [
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool: devMode ? 'cheap-module-eval-source-map' : 'source-map',
+  devtool: devMode ? 'eval-cheap-module-source-map' : 'source-map',
   entry: './src/main.js',
   output: {
-    path: resolve('./dist/'),
     publicPath: devMode ? '/' : '/dist/',
     filename: devMode ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
+    clean: true,
   },
   module: {
     rules: [
@@ -113,24 +113,6 @@ module.exports = {
   ],
   optimization: {
     runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        chunks: 'all',
-        common: {
-          name: 'common',
-          chunks: 'initial',
-          minChunks: 2,
-          priority: 1,
-        },
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'initial',
-          priority: 2,
-          enforce: true,
-        },
-      },
-    },
   },
   resolve: {
     alias: {
