@@ -1,4 +1,5 @@
 <script>
+  import 'reset-css';
   import logo from './assets/logo.png';
 
   export let name;

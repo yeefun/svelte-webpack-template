@@ -57,13 +57,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [resolve('./src/')],
-        exclude: /svelte\.\d+\.css/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-      },
-      {
-        test: /\.css$/,
-        include: [/svelte\.\d+\.css/, resolve('./src/')],
         use: [
           MiniCssExtractPlugin.loader,
           {
