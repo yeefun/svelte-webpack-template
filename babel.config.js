@@ -6,8 +6,7 @@ module.exports = function (api) {
       '@babel/preset-env',
       {
         targets: {
-          browsers:
-            'defaults, ie 11, Edge >= 17, Chrome >= 66, Firefox >= 60, Safari >= 10.1, iOS >= 10.2, Android >= 67, ChromeAndroid >= 67, Samsung >= 6.2',
+          browsers: 'defaults, not IE 11',
         },
         ignoreBrowserslistConfig: true,
         // debug: true,
