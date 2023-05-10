@@ -35,7 +35,7 @@
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
     "stylus": "^0.54.8",
-    "svelte": "^3.38.3",
+    "svelte": "^3.49.0",
     "svelte-loader": "^3.1.2",
     "svelte-preprocess": "^4.7.3",
     "url-loader": "^4.1.1",
